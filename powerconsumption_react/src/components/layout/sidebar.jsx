@@ -1,9 +1,14 @@
-import { Outlet, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Outlet, Link, useLocation } from "react-router-dom";
+import { useGlobalState } from "../../main";
+
 
 export default function SideBar() {
+    const [state, dispatch] = useGlobalState();
+    const location = useLocation();
     return (
         <>
-            <aside className="sidebar" data-sidebar>
+            <aside className={`sidebar ${state.open ? 'open' : ''}`}>
                 <div className="top-sidebar">
                     <a href="#" className=" project-logo"><img /></a>
                     <div className="hidden-sidebar your-project"></div>
@@ -11,28 +16,28 @@ export default function SideBar() {
                 </div>
                 <div className="middle-sidebar">
                     <ul className="sidebar-list">
-                        <li className="sidebar-list-item active">
-                            <a href="Dashboard.html" className="sidebar-link">
+                        <li className={`sidebar-list-item ${location.pathname == '/' ? 'active' : ''}`}>
+                            <Link to="/" className="sidebar-link">
                                 <svg className="sidebar-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
                                     <g>
                                         <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path>
                                     </g>
                                 </svg>
                                 <div className="hidden-sidebar">Dashboard</div>
-                            </a>
+                            </Link>
                         </li>
-                        <li className="sidebar-list-item ">
-                            <a href="Computers.html" className="sidebar-link">
+                        <li className={`sidebar-list-item ${location.pathname == '/computers' ? 'active' : ''}`}>
+                            <Link to="/computers" className="sidebar-link">
                                 <svg className="sidebar-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
                                     <g>
                                         <path d="M1 2h22v12H1V2zm1 1v10h20V3H2zm4 15h10v1H6v-1zm6-4v4h-1v-4h1z" />
                                     </g>
                                 </svg>
                                 <div className="hidden-sidebar">Computers</div>
-                            </a>
+                            </Link>
                         </li>
-                        <li className="sidebar-list-item">
-                            <a href="Diagrams.html" className="sidebar-link">
+                        <li className={`sidebar-list-item ${location.pathname == '/diagrams' ? 'active' : ''}`}>
+                            <a href="/diagrams" className="sidebar-link">
                                 <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className="sidebar-icon">
                                     <g>
                                         <path
@@ -67,4 +72,4 @@ export default function SideBar() {
             </aside>
         </>
     );
-}
+};
