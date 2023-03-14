@@ -1,0 +1,356 @@
+body,
+#root {
+    margin: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --accent-color: rgb(204, 0, 0);
+    --lightest-gray: rgb(244, 244, 244);
+    --light-gray: rgb(144, 144, 144);
+    --medium-gray: rgb(96, 96, 96);
+    --dark-gray: rgb(13, 13, 13);
+    --light-cyan: rgb(24 255 255 / 12%);
+    --cyan: rgb(24 255 255 / 50%);
+    --header-height: 40px;
+    --animation-duration: 200ms;
+    --animation-timing-curve: ease-in-out;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .4);
+    padding: 0 .5rem;
+    height: var(--header-height);
+}
+
+.menu-icon-btn {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.menu-icon {
+    width: 25px;
+    height: 25px;
+    fill: var(--medium-gray);
+    cursor: pointer;
+}
+
+.menu-icon:hover {
+    fill: var(--dark-gray);
+}
+
+.sidebar {
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 75px;
+    border-right: 1px solid var(--light-gray);
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--header-height));
+    padding-top: 1rem;
+    align-items: center;
+    justify-content: stretch;
+    transition: width var(--animation-duration) var(--animation-timing-curve);
+    position: sticky;
+    left: 0;
+    top: var(--header-height);
+}
+
+.sidebar .hidden-sidebar {
+    opacity: 0;
+    width: 0;
+    transition: opacity var(--animation-duration) var(--animation-timing-curve);
+}
+
+.sidebar.open .hidden-sidebar {
+    width: 100%;
+    height: auto;
+    opacity: 1;
+}
+
+.sidebar .top-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar . project-logo {
+    display: block;
+    width: 30px;
+    height: 30px;
+    transition: var(--animation-duration) var(--animation-timing-curve);
+}
+
+.sidebar.open . project-logo {
+    width: 90px;
+    height: 90px;
+}
+
+.sidebar . project-logo>img {
+    width: 100%;
+    height: 100%;
+}
+
+.middle-sidebar {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-grow: 1;
+    margin: 1rem 0;
+}
+
+.middle-sidebar,
+.bottom-sidebar {
+    width: 100%;
+}
+
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  display: flex;
+}
+
+.content {
+    margin: 1rem;
+}
+
+.sidebar-list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+}
+
+.sidebar.open .sidebar-link {
+    justify-content: flex-start;
+}
+
+.sidebar-icon {
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+}
+
+.sidebar-list .hidden-sidebar {
+    margin-left: 1.5rem;
+    white-space: nowrap;
+}
+
+.sidebar-link {
+    display: flex;
+    width: 100%;
+    padding: .5rem 0;
+    color: var(--light-gray);
+    text-decoration: none;
+    align-items: center;
+    padding-left: 25px;
+}
+
+.sidebar-list-item {
+    position: relative;
+    width: 100%;
+    fill: var(--light-gray);
+}
+
+.sidebar-list-item.active {
+    fill: var(--accent-color);
+    background-color: var(--lightest-gray);
+}
+
+.sidebar-list-item:hover {
+    background-color: var(--lightest-gray);
+}
+
+.sidebar-list-item.active::before {
+    content: "";
+    background-color: var(--accent-color);
+    height: 100%;
+    left: 0;
+    width: 3px;
+    position: absolute;
+}
+
+.sidebar.open {
+    width: 200px;
+}
+
+.your-project {
+    color: var(--dark-gray);
+    font-size: .75rem;
+    font-weight: bold;
+    margin-bottom: .15rem;
+    margin-top: .5rem;
+}
+
+.project-name {
+    color: var(--medium-gray);
+    font-size: .75rem;
+}
+
+.sidebar .top-sidebar {
+    height: 30px;
+    transition: height var(--animation-duration) var(--animation-timing-curve);
+}
+
+.sidebar.open .top-sidebar {
+    height: 125px;
+}
+
+.sidebar .top-sidebar .hidden-sidebar {
+    text-align: center;
+    width: 100%;
+}
+
+.cards {
+    text-align: center;
+    width: 10rem;
+    height: 100%;
+    background: var(--medium-gray);
+}
+
+.card {
+    background: var(--light-cyan);
+    width: 240px;
+    height: 135px;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+.card:hover {
+    background-color: var(--cyan);
+}
+
+.card-link {
+    text-decoration: none;
+}
+
+.card-body {
+    height: 100%;
+}
+
+.card-svg {
+    display: block;
+    margin: 0 auto;
+    height: 80%;
+}
+
+.card-title {
+
+    width: 100%;
+    margin: 0px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    table-layout: fixed;
+    overflow-wrap: break-word;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+}
+
+th {
+    background: var(--light-cyan);
+    border: 1px solid gray;
+    font-weight: bold;
+}
+
+.button {
+    border-radius: 25px;
+    padding: 7px 40px;
+    background-color: #acecf9;
+    color: black;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: #4799a9;
+    color: white;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
