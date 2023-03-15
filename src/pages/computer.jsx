@@ -53,7 +53,7 @@ export default function Computer() {
     }
 
     const consumptionRender = consumptions.map(function (consumption, index) {
-        let time = moment(consumption.time).format('YYYY-MM-DD HH:MM');
+        let time = moment(consumption.time).format('YYYY-MM-DD HH:mm');
         return (
             <tr key={consumption.id}>
                 <td>{time}</td>
@@ -81,7 +81,7 @@ export default function Computer() {
                     {consumptionRender}
                 </tbody>
             </table>
-            <button className="btn btn-primary w-100" onClick={getNextPage}>Load More</button>
+            {pagination.nextCursor != null ? <button className="btn btn-primary w-100" onClick={getNextPage}>Load More</button> : null}
         </div>
     );
 }
