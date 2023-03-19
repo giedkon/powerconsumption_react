@@ -6,38 +6,39 @@ import moment from "moment/moment";
 export default function Computer() {
     let { computerId } = useParams();
 
+    const [perPage, setPerPage] = useState(10);
     const [isLoading, setLoading] = useState(true);
     const [isError, setError] = useState(false);
     const [consumptions, setConsumptions] = useState([]);
-    const [pagination, setPagination] = useState([]);
-    const [cursor, setCursor] = useState([]);
+    const [moreExists, setMoreExists] = useState(true);
+    const [prevCount, setPrevCount] = useState(0);
 
     function getNextPage() {
-        if (pagination.nextCursor != null) {
-            setCursor(pagination.nextCursor);
-        }
+        setPrevCount(prevCount + perPage);
     }
 
     let axiosParams = {
         computerId: computerId,
         Count: 10,
-        Cursor: cursor
+        prevCount: prevCount
     };
 
     useEffect(() => {
         axios
             .get(import.meta.env.VITE_API_URL + 'computer/' + computerId + '/power_consumption', { params: axiosParams })
             .then(function (response) {
-                let newConsumptions = consumptions.concat(response.data.data);
-
+                let newConsumptions = consumptions.concat(response.data);
                 setLoading(false);
-                setConsumptions(newConsumptions)
-                setPagination(response.data.pagination)
+                setConsumptions(newConsumptions);
+                if(response.data.length == 0) {
+                    setMoreExists(false)
+                }
+                
             }).catch(function (error) {
                 setLoading(false);
                 setError(true);
             });
-    }, [cursor]);
+    }, [prevCount]);
 
 
     if (isLoading) {
@@ -51,13 +52,12 @@ export default function Computer() {
             </div>
         );
     }
-
     const consumptionRender = consumptions.map(function (consumption, index) {
         let time = moment(consumption.time).format('YYYY-MM-DD HH:mm');
         return (
             <tr key={consumption.id}>
                 <td>{time}</td>
-                <td>{consumption.inactivity}</td>
+                <td>{consumption.inactivity || '--'}</td>
                 <td>{consumption.cpuPowerDraw} kWh</td>
                 <td>{consumption.gpuPowerDraw} kWh</td>
             </tr>
@@ -81,7 +81,7 @@ export default function Computer() {
                     {consumptionRender}
                 </tbody>
             </table>
-            {pagination.nextCursor != null ? <button className="btn btn-primary w-100" onClick={getNextPage}>Load More</button> : null}
+            {moreExists ? <button className="btn btn-primary w-100" onClick={getNextPage}>Load More</button> : <div className='alert alert-info'>No more items</div>}
         </div>
     );
 }
