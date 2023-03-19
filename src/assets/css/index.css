@@ -274,7 +274,6 @@ body,
 
 th,
 td {
-  text-align: center;
   padding: 10px;
   border: 1px solid #e5e5e5;
 }
@@ -292,6 +291,7 @@ th {
   color: black;
   text-decoration: none;
   transition: 0.1 ease-in-out all;
+  margin-left: 30%;
 }
 
 .button:hover {
