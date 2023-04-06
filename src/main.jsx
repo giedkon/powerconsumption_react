@@ -16,6 +16,7 @@ import ErrorPage from './error_pages/404';
 import Dashboard from './pages/dashboard';
 import Computer from './pages/computer';
 import ComputerList from './pages/computerList';
+import Diagrams from './pages/diagrams';
 
 
 const defaultGlobalState = {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "computer/:computerId",
         element: <Computer />,
+      },
+      {
+        path: "/diagrams",
+        element: <Diagrams />,
       },
     ],
   },
