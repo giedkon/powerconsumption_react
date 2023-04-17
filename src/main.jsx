@@ -5,6 +5,7 @@ import { useState } from 'react';
 // CSS
 import './assets/css/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap';
 
 import {
   createBrowserRouter,
