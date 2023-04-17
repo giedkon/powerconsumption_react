@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import moment from "moment/moment";
 import momentDurationFormatSetup from "moment-duration-format";
+import AddComputerButton from "./components/AddComputerButton";
 momentDurationFormatSetup(moment);
 
 function getTimeStr(seconds) {
@@ -14,14 +15,10 @@ export default function ComputerList() {
     const [isLoading, setLoading] = useState(true);
     const [isError, setError] = useState(false);
     const [computers, setComputers] = useState([]);
-    // const [pagination, setPagination] = useState([]);
-    // const [cursor, setCursor] = useState([]);
 
-    // function getNextPage() {
-    //     if (pagination.nextCursor != null) {
-    //         setCursor(pagination.nextCursor);
-    //     }
-    // }
+    function handleAddComputer(computer) {
+        setComputers([...computers, computer]);
+    }
 
     useEffect(() => {
         axios
@@ -29,13 +26,12 @@ export default function ComputerList() {
             .then(function (response) {
                 setLoading(false);
                 setComputers(response.data)
-                // setPagination(response.data.pagination)
             }).catch(function (error) {
                 console.log(error);
                 setLoading(false);
                 setError(true);
             });
-    }, []);
+    }, [computers]);
 
 
     if (isLoading) {
@@ -67,20 +63,35 @@ export default function ComputerList() {
 
 
     return (
-        <div className="tables">
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Computer Name</th>
-                        <th>Inactivity </th>
-                        <th>Total power consumption (last 5 min)</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {consumptionRender}
-                </tbody>
-            </table>
-        </div>
+        <>
+            <div className="row">
+                <div className="col">
+                    <h1>All computers</h1>
+                </div>
+                <div className="col text-end me-3">
+                    <AddComputerButton 
+                        size='lg' 
+                        onAddComputer={handleAddComputer} 
+                    />
+                </div>
+            </div>
+            <div className="row">
+                <div className="tables">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Computer Name</th>
+                                <th>Inactivity </th>
+                                <th>Total power consumption (last 5 min)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {consumptionRender}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </>
     );
 };
