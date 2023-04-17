@@ -161,22 +161,22 @@ export default function ComputerDetails() {
             <div className="col-md-5 col-12 mx-5 mt-3">
                 <div className="d-flex flex-row justify-content-center">
                         <button 
-                            className={chartRange == 'day' ? 'btn btn-primary' : 'btn btn-info' + ' mx-1'} 
+                            className={chartRange == 'day' ? 'btn btn-primary mx-1' : 'btn btn-info mx-1'} 
                             onClick={() => setChartRangeFunc('day')}>
                                 Day
                         </button>
                         <button 
-                            className={chartRange == 'week' ? 'btn btn-primary' : 'btn btn-info' + ' mx-1'}
+                            className={chartRange == 'week' ? 'btn btn-primary mx-1' : 'btn btn-info mx-1'}
                             onClick={() => setChartRangeFunc('week')}>
                                 Week
                         </button>
                         <button 
-                            className={chartRange == 'month' ? 'btn btn-primary' : 'btn btn-info' + ' mx-1'}  
+                            className={chartRange == 'month' ? 'btn btn-primary mx-1' : 'btn btn-info mx-1'}  
                             onClick={() => setChartRangeFunc('month')}>
                                 Month
                         </button>
                         <button 
-                            className={chartRange == 'year' ? 'btn btn-primary' : 'btn btn-info' + ' mx-1'}  
+                            className={chartRange == 'year' ? 'btn btn-primary mx-1' : 'btn btn-info mx-1'}  
                             onClick={() => setChartRangeFunc('year')}>
                                 Year
                         </button>
