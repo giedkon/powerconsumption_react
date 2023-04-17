@@ -20,13 +20,29 @@ export default function ComputerList() {
         setComputers([...computers, computer]);
     }
 
+    function deleteComputer(id) {
+        if (confirm("Are you sure?") == true) {
+            axios
+                .delete(import.meta.env.VITE_API_URL + 'computer/' + id)
+                .then(function (response) {
+                    setComputers((prevComputers) => {
+                        return prevComputers.filter(comp => comp.id !== id);
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
+
     useEffect(() => {
         axios
             .get(import.meta.env.VITE_API_URL + 'computer')
             .then(function (response) {
                 setLoading(false);
                 setComputers(response.data)
-            }).catch(function (error) {
+            })
+            .catch(function (error) {
                 console.log(error);
                 setLoading(false);
                 setError(true);
@@ -54,7 +70,10 @@ export default function ComputerList() {
                 <td>{inactiveTime}</td>
                 <td>--</td>
                 <td>
-                    <Link to={'/computer/' + computer.id} className="button" >Details</Link>
+                    <div className="d-flex justify-content-between">
+                        <Link to={'/computer/' + computer.id} className="button me-2" >Details</Link>
+                        <Link className="button-red ms-2" onClick={() => deleteComputer(computer.id)}>Delete</Link>
+                    </div>
                 </td>
             </tr>
         );
