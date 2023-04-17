@@ -61,7 +61,7 @@ export default function ComputerDetails() {
         axios
             .get(import.meta.env.VITE_API_URL + 'computer/' + computerId)
             .then(function (response) {
-                console.log(response.data);
+                //console.log(response.data);
                 setComputerInfo(response.data);
             }).catch(function (error) {
                 setLoading(false);
@@ -160,10 +160,26 @@ export default function ComputerDetails() {
             </div>
             <div className="col-md-5 col-12 mx-5 mt-3">
                 <div className="d-flex flex-row justify-content-center">
-                        <button className="btn btn-info mx-1" onClick={() => setChartRangeFunc('day')}>Day</button>
-                        <button className="btn btn-info mx-1" onClick={() => setChartRangeFunc('week')}>Week</button>
-                        <button className="btn btn-info mx-1" onClick={() => setChartRangeFunc('month')}>Month</button>
-                        <button className="btn btn-info mx-1" onClick={() => setChartRangeFunc('year')}>Year</button>
+                        <button 
+                            className={chartRange == 'day' ? 'btn btn-primary' : 'btn btn-info' + ' mx-1'} 
+                            onClick={() => setChartRangeFunc('day')}>
+                                Day
+                        </button>
+                        <button 
+                            className={chartRange == 'week' ? 'btn btn-primary' : 'btn btn-info' + ' mx-1'}
+                            onClick={() => setChartRangeFunc('week')}>
+                                Week
+                        </button>
+                        <button 
+                            className={chartRange == 'month' ? 'btn btn-primary' : 'btn btn-info' + ' mx-1'}  
+                            onClick={() => setChartRangeFunc('month')}>
+                                Month
+                        </button>
+                        <button 
+                            className={chartRange == 'year' ? 'btn btn-primary' : 'btn btn-info' + ' mx-1'}  
+                            onClick={() => setChartRangeFunc('year')}>
+                                Year
+                        </button>
                 </div>
                 <ComputerConsumptionChart computerId={computerId} range={chartRange} data={data}/>
             </div>

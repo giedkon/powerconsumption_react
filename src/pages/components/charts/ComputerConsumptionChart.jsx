@@ -131,8 +131,6 @@ export default function ComputerConsumptionChart({ computerId, range, data }) {
             break;
     }
 
-    console.log(range, previous, today);
-
     return (
         <div className="chart">
             <div className="row">
