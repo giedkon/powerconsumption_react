@@ -5,6 +5,7 @@ import { useState } from 'react';
 // CSS
 import './assets/css/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap';
 
 import {
   createBrowserRouter,
@@ -16,6 +17,7 @@ import ErrorPage from './error_pages/404';
 import Dashboard from './pages/dashboard';
 import Computer from './pages/computer';
 import ComputerList from './pages/computerList';
+import ComputerDetails from './pages/computerDetails';
 import Diagrams from './pages/diagrams';
 
 
@@ -61,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "computer/:computerId",
         element: <Computer />,
+      },
+      {
+        path: "computer/:computerId/details",
+        element: <ComputerDetails />
       },
       {
         path: "/diagrams",

@@ -11,6 +11,7 @@ export default function Computer() {
     const [isLoading, setLoading] = useState(true);
     const [isError, setError] = useState(false);
     const [consumptions, setConsumptions] = useState([]);
+    const [computerInfo, setComputerInfo] = useState({});
     const [moreExists, setMoreExists] = useState(true);
     const [prevCount, setPrevCount] = useState(0);
     const [chartRange, setChartRange] = useState("daily");
@@ -27,6 +28,18 @@ export default function Computer() {
         Count: 10,
         prevCount: prevCount
     };
+
+    useEffect(() => {
+        axios
+            .get(import.meta.env.VITE_API_URL + 'computer/' + computerId)
+            .then(function (response) {
+                console.log(response.data);
+                setComputerInfo(response.data);
+            }).catch(function (error) {
+                setLoading(false);
+                setError(true);
+            });
+    }, []);
 
     useEffect(() => {
         axios
@@ -70,10 +83,20 @@ export default function Computer() {
 
     });
 
-
     return (
-        <div className="row">
-            <div className="col-md-8 col-12">
+        <>
+            <div className="row">
+                <div className="col">
+                    <h1>{computerInfo.name} Power Consumptions</h1>
+                </div>
+                <div className="col text-end me-3">
+                    <a href={computerId + "/details"} className="btn btn-lg btn-primary">More details</a>
+                </div>
+            </div>
+            {/*<div className="row">
+                <a href={computerId + "/details"} className="btn btn-primary ms-3" style={{width: '8rem'}}>More details</a>
+            </div>*/}
+            <div className="row">
                 <div className="tables">
                     <table className="table">
                         <thead>
@@ -91,15 +114,6 @@ export default function Computer() {
                     {moreExists ? <button className="btn btn-primary w-100" onClick={getNextPage}>Load More</button> : <div className='alert alert-info'>No more items</div>}
                 </div>
             </div>
-            <div className="col-md-4 col-12">
-                {/* <button className="btn btn-primary w-100" onClick={() => setChartRange("daily")}>Load More</button> */}
-                <div className="d-flex flex-row justify-content-center">
-                    <button className="btn btn-info mx-1" onClick={() => setChartRangeFunc('daily')}>Daily</button>
-                    <button className="btn btn-info mx-1" onClick={() => setChartRangeFunc('weekly')}>Weekly</button>
-                    <button className="btn btn-info mx-1" onClick={() => setChartRangeFunc('monthly')}>Monthly</button>
-                </div>
-                <ComputerConsumptionChart computerId={computerId} range={chartRange}/>
-            </div>
-        </div>
+        </>
     );
 }
