@@ -217,11 +217,6 @@ body,
   width: 100%;
 }
 
-.card-deck {
-  display: flex;
-  flex-direction: row;
-}
-
 .cards {
   text-align: center;
   width: 10rem;

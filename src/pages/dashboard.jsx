@@ -37,8 +37,15 @@ export default function Dashboard() {
     );
 
     return (
-        <div className="card-deck">
-            {computersRender}
-        </div>
+        <>
+            <div className="row text-center mb-3">
+                <h1>Dashboard</h1>
+            </div>
+            <div className="row">
+                <div className="d-flex justify-content-center">
+                    {computersRender}
+                </div>
+            </div>
+        </>
     );
 }
