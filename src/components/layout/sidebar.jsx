@@ -54,8 +54,8 @@ export default function SideBar() {
                 </div>
                 <div className="bottom-sidebar">
                     <ul className="sidebar-list">
-                        <li className="sidebar-list-item">
-                            <a href="#" className="sidebar-link">
+                        <li className={`sidebar-list-item ${location.pathname == '/settings' ? 'active' : ''}`}>
+                            <a href="/settings" className="sidebar-link">
                                 <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" className="sidebar-icon">
                                     <g>
                                         <path
