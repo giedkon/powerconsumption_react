@@ -19,7 +19,7 @@ import Computer from './pages/computer';
 import ComputerList from './pages/computerList';
 import ComputerDetails from './pages/computerDetails';
 import Diagrams from './pages/diagrams';
-
+import Setings from './pages/settings';
 
 const defaultGlobalState = {
   open: false,
@@ -71,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: "/diagrams",
         element: <Diagrams />,
+      },
+      {
+        path: "/settings",
+        element: <Setings />,
       },
     ],
   },
