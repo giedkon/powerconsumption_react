@@ -1,5 +1,4 @@
-import axios from "axios";
-import bootstrap from "bootstrap";
+// import bootstrap from "bootstrap";
 
 export default function AddComputerButton(props) {
     const { size, onAddComputer } = props;
@@ -14,7 +13,7 @@ export default function AddComputerButton(props) {
         }
 
         axios
-            .post(import.meta.env.VITE_API_URL + 'computer', body)
+            .post('computer', body)
             .then((response) => {
                 console.log(response);
                 

@@ -1,20 +1,14 @@
 import React from "react";
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import SideBar from '../components/layout/sidebar';
-import TopNavigation from '../components/layout/top_nav';
+import { useGlobalState } from "../main";
 
 
 export default function Root() {
+    const [state, dispatch] = useGlobalState();
+    // dispatch({ token: localStorage.getItem('token') });
     return (
         <>
-            <TopNavigation />
-            <div className="container-fluid">
-                <SideBar />
-                <main className="content">
-                    <Outlet />
-                </main>
-            </div>
+            <Outlet />
         </>
     );
 }

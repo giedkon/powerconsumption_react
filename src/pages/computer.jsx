@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import axios from "axios";
 import moment from "moment/moment";
 import ComputerConsumptionChart from "./components/charts/ComputerConsumptionChart";
 
@@ -31,7 +30,7 @@ export default function Computer() {
 
     useEffect(() => {
         axios
-            .get(import.meta.env.VITE_API_URL + 'computer/' + computerId)
+            .get('computer/' + computerId)
             .then(function (response) {
                 console.log(response.data);
                 setComputerInfo(response.data);
@@ -43,7 +42,7 @@ export default function Computer() {
 
     useEffect(() => {
         axios
-            .get(import.meta.env.VITE_API_URL + 'computer/' + computerId + '/power_consumption', { params: axiosParams })
+            .get('computer/' + computerId + '/power_consumption', { params: axiosParams })
             .then(function (response) {
                 let newConsumptions = consumptions.concat(response.data);
                 setLoading(false);
@@ -60,7 +59,7 @@ export default function Computer() {
 
 
     if (isLoading) {
-        return <div className="loading">Loading...</div>;
+        return <div className="loading"></div>;
     }
 
     if (isError) {

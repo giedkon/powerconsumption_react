@@ -48,8 +48,11 @@ export default function SideBar() {
                                 <div className="hidden-sidebar">Diagrams</div>
                             </a>
                         </li>
-
-
+                        <li className={`sidebar-list-item ${location.pathname == '/authTest' ? 'active' : ''}`}>
+                            <Link to="/authTest" className="sidebar-link">
+                                <div>Auth test</div>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="bottom-sidebar">

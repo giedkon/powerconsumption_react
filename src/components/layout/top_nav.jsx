@@ -3,6 +3,13 @@ import { useGlobalState } from "../../main";
 
 export default function TopNavigation() {
     const [state, dispatch] = useGlobalState();
+
+    function logOut() {
+        dispatch({token: null});
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+    }
+
     return (
         <header className="header">
             <button onClick={() => dispatch({ open: !state.open })} className="menu-icon-btn" data-menu-icon-btn>
@@ -12,6 +19,13 @@ export default function TopNavigation() {
                     </g>
                 </svg>
             </button>
+            <div>
+                <span className='username'>{state.userName}</span>
+                <button onClick={logOut} className="logout">
+                    Log out
+                </button>
+            </div>
+
         </header>
     );
 }

@@ -4,6 +4,10 @@ body,
 #root {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1706%26quot%3b)' fill='none'%3e%3crect width='1920' height='1080' x='0' y='0' fill='url(%23SvgjsLinearGradient1707)'%3e%3c/rect%3e%3cpath d='M0 0L721.81 0L0 138.78z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M0 138.78L721.81 0L1353.53 0L0 314.73z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M0 314.73L1353.53 0L1701.73 0L0 624.77z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M0 624.77L1701.73 0L1808.19 0L0 730.4399999999999z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M1920 1080L1593.02 1080L1920 630.49z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M1920 630.49L1593.02 1080L1057.9499999999998 1080L1920 467.49z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M1920 467.49L1057.9499999999998 1080L444.2199999999998 1080L1920 406.53000000000003z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M1920 406.53L444.2199999999998 1080L188.6599999999998 1080L1920 387.48999999999995z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1706'%3e%3crect width='1920' height='1080' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='10.94%25' y1='-19.44%25' x2='89.06%25' y2='119.44%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1707'%3e%3cstop stop-color='rgba(255%2c 255%2c 255%2c 1)' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(242%2c 235%2c 255%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
 }
 
 *,
@@ -28,6 +32,7 @@ body,
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: sticky;
   top: 0;
   background-color: white;
@@ -374,4 +379,113 @@ input:checked+.slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.logout {
+  background: none;
+  border: none;
+  outline: 1px solid white;
+  transition: 0.2s ease-in-out all;  
+}
+.logout:hover {
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  outline: 1px solid black;
+}
+
+.username {
+  font-style: italic;
+  border-right: 1px solid black;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0px 0px 30px #00000055;
+}
+
+.site-title {
+  text-align: center;
+  overflow: hidden;
+  letter-spacing: 2px;
+  padding: 30px 10px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+}
+.loading:after {
+  position: absolute;
+  z-index: 1000;
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: blue transparent blue transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+.loading:before {
+  position: absolute;
+  z-index: 1000;
+  content: " ";
+  display: block;
+  width: 128px;
+  height: 128px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: blue transparent blue transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.auth-alert {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  text-align: center;
+  animation: fadeout 10s;
+  transition: 0.2 ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
 }

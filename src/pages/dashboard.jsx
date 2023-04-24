@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from "axios";
 
 import ComputerDashItem from "./components/dashboard/ComputerDashItem";
 
@@ -10,7 +9,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         axios
-            .get(import.meta.env.VITE_API_URL + 'computer')
+            .get('computer')
             .then(function (response) {
                 setLoading(false);
                 setComputers(response.data)
