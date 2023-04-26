@@ -25,6 +25,7 @@ import AuthTest from './pages/authtest';
 import Register from './pages/register';
 import Protected from './routes/protected';
 import Auth from './routes/auth';
+import AllComputers from './pages/allComputers';
 
 import axios from 'axios';
 
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
           {
             path: "/authTest",
             element: <AuthTest />,
+          },
+          {
+            path: "/allcomputers",
+            element: <AllComputers/>,
           }
         ]
       },
