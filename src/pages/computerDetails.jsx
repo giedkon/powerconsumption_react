@@ -57,17 +57,19 @@ export default function ComputerDetails() {
     const [isError, setError] = useState(false);
     const [data, setData] = useState([]);
 
-    useEffect(() => {
-        axios
-            .get(import.meta.env.VITE_API_URL + 'computer/' + computerId)
-            .then(function (response) {
-                //console.log(response.data);
-                setComputerInfo(response.data);
-            }).catch(function (error) {
-                setLoading(false);
-                setError(true);
-            });
-    }, []);
+    if (computerId != null) {
+        useEffect(() => {
+            axios
+                .get(import.meta.env.VITE_API_URL + 'computer/' + computerId)
+                .then(function (response) {
+                    //console.log(response.data);
+                    setComputerInfo(response.data);
+                }).catch(function (error) {
+                    setLoading(false);
+                    setError(true);
+                });
+        }, []);
+    }
 
     useEffect(() => {
         const axiosParams = {
@@ -78,8 +80,10 @@ export default function ComputerDetails() {
             maxTime: chartParam.today
         };
 
+        const endpoint = computerId == null ? 'computer/power_consumption' : 'computer/' + computerId + '/power_consumption';
+
         axios
-            .get(import.meta.env.VITE_API_URL + 'computer/' + computerId + '/power_consumption', { params: axiosParams })
+            .get(import.meta.env.VITE_API_URL + endpoint, { params: axiosParams })
             .then(function (response) {
                 setLoading(false);
                 setData(response.data);
@@ -124,7 +128,7 @@ export default function ComputerDetails() {
         return (
             <>
                 <div>
-                    <h1>{computerInfo.name} details</h1>
+                    <h1>{computerId != null ? computerInfo.name : 'All computer'} details</h1>
                 </div>
                 <div className="tables">
                     <table className="table">
@@ -148,7 +152,7 @@ export default function ComputerDetails() {
     const NoResultError = () => {
         return (
             <div className='d-flex justify-content-center mt-5'>
-                <h1>There is no {computerInfo.name} data for the selected timespan!</h1>
+                <h1>There is no {computerId != null ? computerInfo.name : ''} data for the selected timespan!</h1>
             </div>
         )
     }
@@ -181,7 +185,7 @@ export default function ComputerDetails() {
                                 Year
                         </button>
                 </div>
-                <ComputerConsumptionChart computerId={computerId} range={chartRange} data={data}/>
+                <ComputerConsumptionChart range={chartRange} data={data}/>
             </div>
         </div>
     )

@@ -55,7 +55,7 @@ export default function Login(props) {
         <>
             <form>
                 {error ? error : ''}
-                <h1 className="site-title">{import.meta.env.VITE_SITE_NAME}</h1>
+                <h1 className="site-title">Login</h1>
                 <input value={userName} onChange={e => setUserName(e.target.value)} placeholder='Vartotojo vardas' className="form-control p-2 mb-2" name='name' type='text' />
                 <input value={password} onChange={e => setPassword(e.target.value)} placeholder='Slaptažodis' className="form-control p-2" name='password' type='password' />
                 <div className="d-flex justify-content-end">

@@ -107,7 +107,7 @@ function BarChart(props) {
     );
 }
 
-export default function ComputerConsumptionChart({ computerId, range, data }) {
+export default function ComputerConsumptionChart({ range, data }) {
     let today = moment().endOf('day').format('YYYY-MM-DDTHH:mm:ss');
     let previous = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss');
     let count = 24;

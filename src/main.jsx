@@ -81,6 +81,10 @@ const router = createBrowserRouter([
             element: <ComputerList />,
           },
           {
+            path: "/computers/details",
+            element: <ComputerDetails />
+          },
+          {
             path: "computer/:computerId",
             element: <Computer />,
           },
