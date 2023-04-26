@@ -37,7 +37,7 @@ export default function AddComputerButton(props) {
                 type="button" 
                 data-bs-toggle="modal"
                 data-bs-target="#addComputerModal"
-                className={size == 'lg' ? 'btn btn-lg btn-primary' : 'btn btn-primary'}>
+                className={size == 'lg' ? 'btn btn-lg btn-success' : 'btn btn-success'}>
                     Add computer
             </button>
 

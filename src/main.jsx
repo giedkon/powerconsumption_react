@@ -106,7 +106,7 @@ const router = createBrowserRouter([
             element: <AuthTest />,
           },
           {
-            path: "/allcomputers",
+            path: "/allComputers",
             element: <AllComputers/>,
           }
         ]

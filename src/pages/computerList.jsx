@@ -47,7 +47,7 @@ export default function ComputerList() {
                 setLoading(false);
                 setError(true);
             });
-    }, [computers]);
+    }, []);
 
 
     if (isLoading) {
@@ -87,11 +87,14 @@ export default function ComputerList() {
                 <div className="col">
                     <h1>All computers</h1>
                 </div>
-                <div className="col text-end me-3">
+                <div className="col text-end">
                     <AddComputerButton 
                         size='lg' 
                         onAddComputer={handleAddComputer} 
                     />
+                    <a href="/allComputers" className="btn btn-lg btn-primary ms-3">
+                        All computer details
+                    </a>
                 </div>
             </div>
             <div className="row">
