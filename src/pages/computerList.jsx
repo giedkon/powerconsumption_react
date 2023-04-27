@@ -51,7 +51,7 @@ export default function ComputerList() {
 
 
     if (isLoading) {
-        return <div className="loading">Loading...</div>;
+        return <div className="loading"></div>;
     }
 
     if (isError) {

@@ -1,16 +1,36 @@
-// import bootstrap from "bootstrap";
+import { useRef } from "react";
 
 export default function AddComputerButton(props) {
+    const idInputError = useRef(null);
+    const nameInputError = useRef(null);
+    const serverError = useRef(null);
     const { size, onAddComputer } = props;
     const modal = document.getElementById('addComputerModal');
 
     function handleSubmit(e) {
         e.preventDefault();
 
+        let error = false;
+        idInputError.current.hidden = true;
+        nameInputError.current.hidden = true;
+        serverError.current.hidden = true;
+
         const body = {
             id: e.target.id.value,
             name: e.target.name.value
         }
+
+        if (body.id == "") {
+            idInputError.current.hidden = false;
+            error = true;
+        }
+
+        if (body.name == "") {
+            nameInputError.current.hidden = false;
+            error = true;
+        }
+
+        if (error === true) return
 
         axios
             .post('computer', body)
@@ -27,7 +47,11 @@ export default function AddComputerButton(props) {
                 bootstrapModal.hide();
             })
             .catch((error) => {
-                console.log(error);
+                if (error.response.status != 201)
+                {
+                    serverError.current.hidden = false;
+                    console.log(error);
+                }
             });
     }
 
@@ -53,13 +77,16 @@ export default function AddComputerButton(props) {
                                 <div className="mb-3">
                                     <label htmlFor="id">ID<span className="text-danger">*</span></label>
                                     <input type="text" className="form-control" id="id" />
+                                    <p ref={idInputError} className="text-danger" hidden>Id field is required</p>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="name">Name<span className="text-danger">*</span></label>
                                     <input type="text" className="form-control" id="name" />
+                                    <p ref={nameInputError} className="text-danger" hidden>Name field is required</p>
                                 </div>
                                 <div className="mb-3">
                                     <span className="text-danger">*</span> fields are required
+                                    <p className="text-warning" ref={serverError} hidden>Server error: try again later</p>
                                 </div>
                             </div>
                             <div className="modal-footer">
