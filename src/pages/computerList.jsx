@@ -4,6 +4,7 @@ import axios from "axios";
 import moment from "moment/moment";
 import momentDurationFormatSetup from "moment-duration-format";
 import AddComputerButton from "./components/AddComputerButton";
+import EditComputerButton from "./components/EditComputerButton";
 momentDurationFormatSetup(moment);
 
 function getTimeStr(seconds) {

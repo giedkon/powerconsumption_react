@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import moment from "moment/moment";
 import ComputerConsumptionChart from "./components/charts/ComputerConsumptionChart";
+import EditComputerButton from "./components/EditComputerButton";
 
 export default function Computer() {
     let { computerId } = useParams();
@@ -14,6 +15,13 @@ export default function Computer() {
     const [moreExists, setMoreExists] = useState(true);
     const [prevCount, setPrevCount] = useState(0);
     const [chartRange, setChartRange] = useState("daily");
+
+    function handleComputerUpdate(name) {
+        setComputerInfo((prevInfo) => ({
+            ...prevInfo,
+            name: name
+        }));
+    }
 
     function getNextPage() {
         setPrevCount(prevCount + perPage);
@@ -89,7 +97,12 @@ export default function Computer() {
                     <h1>{computerInfo.name} Power Consumptions</h1>
                 </div>
                 <div className="col text-end me-3">
-                    <a href={computerId + "/details"} className="btn btn-lg btn-primary">More details</a>
+                    <a href={computerId + "/details"} className="btn btn-lg btn-primary me-3">More details</a>
+                    <EditComputerButton
+                        computerId={computerId}
+                        size='lg'
+                        handleComputerUpdate={handleComputerUpdate}
+                    />
                 </div>
             </div>
             {/*<div className="row">

@@ -1,49 +1,32 @@
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import bootstrap from "bootstrap";
 
-export default function AddComputerButton(props) {
-    const idInputError = useRef(null);
+export default function EditComputerButton(props) {
     const nameInputError = useRef(null);
     const serverError = useRef(null);
-    const { size, onAddComputer } = props;
-    const modal = document.getElementById('addComputerModal');
+
+    const { computerId, size, handleComputerUpdate } = props;
 
     function handleSubmit(e) {
         e.preventDefault();
 
-        let error = false;
-        idInputError.current.hidden = true;
         nameInputError.current.hidden = true;
         serverError.current.hidden = true;
 
         const body = {
-            id: e.target.id.value,
             name: e.target.name.value
-        }
-
-        if (body.id == "") {
-            idInputError.current.hidden = false;
-            error = true;
         }
 
         if (body.name == "") {
             nameInputError.current.hidden = false;
-            error = true;
+            return;
         }
 
-        if (error === true) return
-
         axios
-            .post('computer', body)
+            .put(import.meta.env.VITE_API_URL + 'computer/' + computerId, body)
             .then((response) => {
-                console.log(response);
-                
-                onAddComputer({
-                    id: body.id,
-                    name: body.name,
-                    inactivity: 0
-                });
-
+                handleComputerUpdate(body.name);
                 const bootstrapModal = bootstrap.Modal.getInstance(modal);
                 bootstrapModal.hide();
             })
@@ -54,6 +37,8 @@ export default function AddComputerButton(props) {
                     console.log(error);
                 }
             });
+
+        return;
     }
 
     return (
@@ -61,25 +46,20 @@ export default function AddComputerButton(props) {
             <button 
                 type="button" 
                 data-bs-toggle="modal"
-                data-bs-target="#addComputerModal"
+                data-bs-target="#editComputerModal"
                 className={size == 'lg' ? 'btn btn-lg btn-success' : 'btn btn-success'}>
-                    Add computer
+                    Edit computer information
             </button>
 
-            <div className="modal fade text-start" id="addComputerModal" tabIndex="-1" aria-labelledby="addComputerModalLabel" aria-hidden="true">
+            <div className="modal fade text-start" id="editComputerModal" tabIndex="-1" aria-labelledby="editComputerModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <form method="POST" onSubmit={handleSubmit}>
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h1 className="modal-title fs-4" id="addComputerModalLabel">Add new computer</h1>
+                                <h1 className="modal-title fs-4" id="editComputerModalLabel">Edit computer information</h1>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
-                                <div className="mb-3">
-                                    <label htmlFor="id">ID<span className="text-danger">*</span></label>
-                                    <input type="text" className="form-control" id="id" />
-                                    <p ref={idInputError} className="text-danger" hidden>Id field is required</p>
-                                </div>
                                 <div className="mb-3">
                                     <label htmlFor="name">Name<span className="text-danger">*</span></label>
                                     <input type="text" className="form-control" id="name" />
@@ -92,7 +72,7 @@ export default function AddComputerButton(props) {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" className="btn btn-primary">Add computer</button>
+                                <button type="submit" className="btn btn-primary">Edit computer</button>
                             </div>
                         </div>
                     </form>
