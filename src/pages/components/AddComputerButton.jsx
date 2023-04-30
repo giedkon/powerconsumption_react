@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import bootstrap from "bootstrap";
 
 export default function AddComputerButton(props) {
     const idInputError = useRef(null);
@@ -44,8 +43,8 @@ export default function AddComputerButton(props) {
                     inactivity: 0
                 });
 
-                const bootstrapModal = bootstrap.Modal.getInstance(modal);
-                bootstrapModal.hide();
+                /*const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                bootstrapModal.hide();*/
             })
             .catch((error) => {
                 if (error.response.status != 201)

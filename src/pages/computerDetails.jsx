@@ -116,7 +116,7 @@ export default function ComputerDetails() {
         return (
             <tr key={val.id}>
                 <td>{time}</td>
-                <td>{val.inactivity || '--'}</td>
+                <td>{val.inactivity.toFixed(5) || '--'}</td>
                 <td>{val.cpuPowerDraw} kWh</td>
                 <td>{val.gpuPowerDraw} kWh</td>
             </tr>

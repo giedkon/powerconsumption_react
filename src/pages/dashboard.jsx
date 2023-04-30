@@ -67,7 +67,7 @@ export default function Dashboard() {
             </div>
             <div className="row mb-3">
                 <div className="d-flex justify-content-center">
-                    <LimitChart currentValue={powerUsage} maxValue={powerLimit.maxValue} title={'Power usage'} />
+                    <LimitChart currentValue={powerUsage.toFixed(3)} maxValue={powerLimit.maxValue} title={'Power usage'} />
                 </div>
             </div>
             <div className="row">

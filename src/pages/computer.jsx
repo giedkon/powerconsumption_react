@@ -83,7 +83,7 @@ export default function Computer() {
             <tr key={consumption.id}>
                 <td>{time}</td>
                 <td>{consumption.inactivity || '--'}</td>
-                <td>{consumption.cpuPowerDraw} kWh</td>
+                <td>{consumption.cpuPowerDraw.toFixed(5)} kWh</td>
                 <td>{consumption.gpuPowerDraw} kWh</td>
             </tr>
         );

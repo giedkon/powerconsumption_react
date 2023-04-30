@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import bootstrap from "bootstrap";
 
 export default function EditComputerButton(props) {
     const nameInputError = useRef(null);
@@ -27,8 +26,8 @@ export default function EditComputerButton(props) {
             .put(import.meta.env.VITE_API_URL + 'computer/' + computerId, body)
             .then((response) => {
                 handleComputerUpdate(body.name);
-                const bootstrapModal = bootstrap.Modal.getInstance(modal);
-                bootstrapModal.hide();
+                /*const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                bootstrapModal.hide();*/
             })
             .catch((error) => {
                 if (error.response.status != 201)
