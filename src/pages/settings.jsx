@@ -9,8 +9,8 @@ export default function Settings() {
   const [energyPrice, setEnergyPrice] = useState(0);
   const [maxEnergy, setMaxEnergy] = useState(0);
 
-  const [prevEnergyPrice, setPrevEnergyPrice] = useState(0);
-  const [prevMaxEnergy, setPrevMaxEnergy] = useState(0);
+  const [prevEnergyPrice, setPrevEnergyPrice] = useState({});
+  const [prevMaxEnergy, setPrevMaxEnergy] = useState({});
 
   //Electricity cost limit GET
   useEffect(() => {
@@ -18,11 +18,7 @@ export default function Settings() {
       .get(import.meta.env.VITE_API_URL + 'electricity_cost/limit')
       .then(function (response) {
         setEnergyPrice(response.data[response.data.length - 1].maxValue);
-        setPrevEnergyPrice(response.data[0]);
-        /*
-        console.log(response.data[response.data.length - 1].maxValue);
-        console.log(response.data[0].id);
-        */
+        setPrevEnergyPrice(response.data[response.data.length - 1]);
       })
       .catch(function (error) {
         console.log(error);
@@ -35,11 +31,7 @@ export default function Settings() {
       .get(import.meta.env.VITE_API_URL + 'power_consumption/limit')
       .then(function (response) {
         setMaxEnergy(response.data[response.data.length - 1].maxValue);
-        setPrevMaxEnergy(response.data[0]);
-        /* 
-        console.log(response.data[response.data.length - 1].maxValue);
-        console.log(response.data[0].id);
-        */
+        setPrevMaxEnergy(response.data[response.data.length - 1]);
       })
       .catch(function (error) {
         console.log(error);
@@ -65,38 +57,35 @@ export default function Settings() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //Electricity cost limit POST
-    axios.post(import.meta.env.VITE_API_URL + 'electricity_cost/limit', {
-      maxValue: energyPrice
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    /*//Electricity cost limit DELETE
-    axios.delete(import.meta.env.VITE_API_URL + 'electricity_cost/limit?limitId='+prevEnergyPrice.id, {
-        })
-        .catch(function (error) {
-          console.log(error);
-        });*/
-    //---------------------------
+
+    //Electricity cost limit POST and DELETE
+    axios
+      .post(import.meta.env.VITE_API_URL + 'electricity_cost/limit', {maxValue: energyPrice})
+      .then(function(response) {
+        axios
+          .delete(import.meta.env.VITE_API_URL + 'electricity_cost/limit', {limitId: prevEnergyPrice.id})
+          .catch(function(error) {
+            console.log(error);
+          });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
     
 
-    //Power Consumption limit POST
-    axios.post(import.meta.env.VITE_API_URL + 'power_consumption/limit', {
-      maxValue: maxEnergy
+    //Power Consumption limit POST and DELETE
+    axios
+      .post(import.meta.env.VITE_API_URL + 'power_consumption/limit', {maxValue: maxEnergy})
+      .then(function(response) {
+        axios
+          .delete(import.meta.env.VITE_API_URL + 'power_consumption/limit', {limitId: prevMaxEnergy.id})
+          .catch(function(error) {
+            console.log(error);
+          });
       })
       .catch(function (error) {
         console.log(error);
       });
-    /*//Power Consumption limit DELETE
-    axios.delete(import.meta.env.VITE_API_URL + 'power_consumption/limit?limitId='+prevMaxEnergy.id, {
-      })
-      .catch(function (error) {
-        console.log(error);
-      });*/
-    //---------------------------
-    
-    // Save settings to backend or do something else
   };
 
   return (

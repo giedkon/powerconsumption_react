@@ -307,6 +307,21 @@ th {
   margin-left: 30%;
 }
 
+.button-green {
+  border-radius: 25px;
+  padding: 7px 40px;
+  background-color: green;
+  color: black;
+  text-decoration: none;
+  transition: 0.1 ease-in-out all;
+  margin-left: 30%;
+}
+
+.button-green:hover {
+  background: darkgreen;
+  color: white;
+}
+
 .button-red:hover {
   background: #c70000;
   color: black;
@@ -385,8 +400,9 @@ input:checked+.slider:before {
   background: none;
   border: none;
   outline: 1px solid white;
-  transition: 0.2s ease-in-out all;  
+  transition: 0.2s ease-in-out all;
 }
+
 .logout:hover {
   background: rgba(0, 0, 0, 1);
   color: white;
@@ -431,6 +447,7 @@ input:checked+.slider:before {
   height: 100vh;
   background: white;
 }
+
 .loading:after {
   position: absolute;
   z-index: 1000;
@@ -444,6 +461,7 @@ input:checked+.slider:before {
   border-color: blue transparent blue transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
+
 .loading:before {
   position: absolute;
   z-index: 1000;
@@ -457,10 +475,12 @@ input:checked+.slider:before {
   border-color: blue transparent blue transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
+
 @keyframes lds-dual-ring {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -481,9 +501,11 @@ input:checked+.slider:before {
   0% {
     opacity: 1;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
     display: none;

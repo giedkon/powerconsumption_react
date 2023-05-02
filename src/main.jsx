@@ -82,6 +82,10 @@ const router = createBrowserRouter([
             element: <ComputerList />,
           },
           {
+            path: "/computers/details",
+            element: <ComputerDetails />
+          },
+          {
             path: "computer/:computerId",
             element: <Computer />,
           },
@@ -102,7 +106,7 @@ const router = createBrowserRouter([
             element: <AuthTest />,
           },
           {
-            path: "/allcomputers",
+            path: "/allComputers",
             element: <AllComputers/>,
           }
         ]

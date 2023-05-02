@@ -75,7 +75,7 @@ export default function Register() {
         <>
             <form>
                 {error ? error : ''}
-                <h1 className="site-title">{import.meta.env.VITE_SITE_NAME}</h1>
+                <h1 className="site-title">Register</h1>
                 <input value={userName} onChange={e => setUserName(e.target.value)} placeholder='Vartotojo vardas' className="form-control p-2 mb-2" name='name' type='text' />
                 <input value={email} onChange={e => setEmail(e.target.value)} placeholder='Vartotojo el. paštas' className="form-control mb-2 p-2" name='email' type='email' />
                 <input value={password} onChange={e => setPassword(e.target.value)} placeholder='Slaptažodis' className="form-control p-2" name='password' type='password' />

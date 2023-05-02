@@ -4,6 +4,7 @@ import axios from "axios";
 import moment from "moment/moment";
 import momentDurationFormatSetup from "moment-duration-format";
 import AddComputerButton from "./components/AddComputerButton";
+import EditComputerButton from "./components/EditComputerButton";
 momentDurationFormatSetup(moment);
 
 function getTimeStr(seconds) {
@@ -47,11 +48,11 @@ export default function ComputerList() {
                 setLoading(false);
                 setError(true);
             });
-    }, [computers]);
+    }, []);
 
 
     if (isLoading) {
-        return <div className="loading">Loading...</div>;
+        return <div className="loading"></div>;
     }
 
     if (isError) {
@@ -87,11 +88,14 @@ export default function ComputerList() {
                 <div className="col">
                     <h1>All computers</h1>
                 </div>
-                <div className="col text-end me-3">
+                <div className="col text-end">
                     <AddComputerButton 
                         size='lg' 
                         onAddComputer={handleAddComputer} 
                     />
+                    <a href="/allComputers" className="btn btn-lg btn-primary ms-3">
+                        All computer details
+                    </a>
                 </div>
             </div>
             <div className="row">

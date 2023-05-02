@@ -76,7 +76,7 @@ export default function Computer() {
                     <h1>All computer power Consumptions</h1>
                 </div>
                 <div className="col text-end me-3">
-                    <a href={computerId + "/details"} className="btn btn-lg btn-primary">More details</a>
+                    <a href={"computers/details"} className="btn btn-lg btn-primary">More details</a>
                 </div>
             </div>
             {/*<div className="row">
