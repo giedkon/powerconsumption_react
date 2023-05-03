@@ -6,11 +6,13 @@ export default function Settings() {
   const [theme, setTheme] = useState('light');
   const [notifications, setNotifications] = useState(true);
 
+  const [saved, setSaved] = useState(-1);//0==false 1==true -1=hidden
+
   const [energyPrice, setEnergyPrice] = useState(0);
   const [maxEnergy, setMaxEnergy] = useState(0);
 
-  const [prevEnergyPrice, setPrevEnergyPrice] = useState({});
-  const [prevMaxEnergy, setPrevMaxEnergy] = useState({});
+  const [energyPriceID, setEnergyPriceID] = useState();
+  const [maxEnergyID, setMaxEnergyID] = useState();
 
   //Electricity cost limit GET
   useEffect(() => {
@@ -18,7 +20,7 @@ export default function Settings() {
       .get(import.meta.env.VITE_API_URL + 'electricity_cost/limit')
       .then(function (response) {
         setEnergyPrice(response.data[response.data.length - 1].maxValue);
-        setPrevEnergyPrice(response.data[response.data.length - 1]);
+        setEnergyPriceID(response.data[response.data.length - 1].id);
       })
       .catch(function (error) {
         console.log(error);
@@ -31,7 +33,7 @@ export default function Settings() {
       .get(import.meta.env.VITE_API_URL + 'power_consumption/limit')
       .then(function (response) {
         setMaxEnergy(response.data[response.data.length - 1].maxValue);
-        setPrevMaxEnergy(response.data[response.data.length - 1]);
+        setMaxEnergyID(response.data[response.data.length - 1].id);
       })
       .catch(function (error) {
         console.log(error);
@@ -55,37 +57,59 @@ export default function Settings() {
     setNotifications(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    //Electricity cost limit POST and DELETE
-    axios
-      .post(import.meta.env.VITE_API_URL + 'electricity_cost/limit', {maxValue: energyPrice})
-      .then(function(response) {
-        axios
-          .delete(import.meta.env.VITE_API_URL + 'electricity_cost/limit', {limitId: prevEnergyPrice.id})
+    setSaved(1)
+    try{
+          //Electricity cost limit POST if PUT >= 404
+          await axios
+          .put(import.meta.env.VITE_API_URL + 'power_consumption/limit/'+ energyPriceID, {maxValue: energyPrice})
           .catch(function(error) {
-            console.log(error);
+            if(error.response.status >= 404){
+              axios
+                .post(import.meta.env.VITE_API_URL + 'electricity_cost/limit', {maxValue: energyPrice})
+                .catch(function(error) {
+                setSaved(0)
+                console.log(error)
+                });
+              
+            }else{
+              setSaved(0)
+              console.log(error);
+            }
+          
           });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+
+          //Power Consumption limit POST if PUT >= 404
+          await axios
+          .put(import.meta.env.VITE_API_URL + 'power_consumption/limit/'+ maxEnergyID, {maxValue: maxEnergy})
+          .catch(function(error) {
+            if(error.response.status >=404){
+              axios
+                .post(import.meta.env.VITE_API_URL + 'power_consumption/limit', {maxValue: energyPrice})
+                .catch(function(error) {
+                  setSaved(0)
+                  console.log(error);
+                });
+              
+            }else
+            {
+              setSaved(0)
+              console.log(error);
+            }
+          });
+
+          if(saved != 0){
+            
+          }
+          
+
+    }catch{
+      setSaved(0);
+      console.log(error);
+    }
     
-
-    //Power Consumption limit POST and DELETE
-    axios
-      .post(import.meta.env.VITE_API_URL + 'power_consumption/limit', {maxValue: maxEnergy})
-      .then(function(response) {
-        axios
-          .delete(import.meta.env.VITE_API_URL + 'power_consumption/limit', {limitId: prevMaxEnergy.id})
-          .catch(function(error) {
-            console.log(error);
-          });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    setTimeout(() => {setSaved(-1);}, 3000);
   };
 
   return (
@@ -134,6 +158,16 @@ export default function Settings() {
           <button className="btn btn-primary mt-3" type="submit">
             Save
           </button>
+          {saved == 1 && (
+          <div className="mt-3" style={{ backgroundColor: 'green' ,borderRadius: "10px"}}>
+            <p className="text-white text-center">Settings saved successfully</p>
+          </div>
+          )}
+          {saved == 0 && (
+          <div className="mt-3" style={{ backgroundColor: 'red' ,borderRadius: "10px"}}>
+            <p className="text-white text-center">Failed to save settings</p>
+          </div>
+          )}
         </form>
       </div>
     </div>
