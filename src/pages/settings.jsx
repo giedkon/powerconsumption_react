@@ -134,6 +134,9 @@ export default function Settings() {
           <button className="btn btn-primary mt-3" type="submit">
             Save
           </button>
+          <a className="btn btn-success ms-2 mt-3" type="submit" href='/settings/electricity'>
+            Electricity plan settings
+          </a>
         </form>
       </div>
     </div>
