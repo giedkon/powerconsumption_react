@@ -28,6 +28,7 @@ import Auth from './routes/auth';
 import AllComputers from './pages/allComputers';
 
 import axios from 'axios';
+import ElectricitySettings from './pages/electricitySettings';
 
 
 const savedToken = localStorage.getItem('token') || null;
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
           {
             path: "/allComputers",
             element: <AllComputers/>,
+          },
+          {
+            path: "/settings/electricity",
+            element: <ElectricitySettings />
           }
         ]
       },

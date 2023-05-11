@@ -2,10 +2,12 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import moment from "moment/moment";
 import ComputerConsumptionChart from "./components/charts/ComputerConsumptionChart";
+import useElectricityCost from "../hooks/useElectricityCost";
 
 export default function Computer() {
     let { computerId } = useParams();
 
+    const cost = useElectricityCost({interval: 'month'});
     const [perPage, setPerPage] = useState(10);
     const [isLoading, setLoading] = useState(true);
     const [isError, setError] = useState(false);
@@ -72,10 +74,13 @@ export default function Computer() {
     return (
         <>
             <div className="row">
-                <div className="col-8">
+                <div className="col-6">
                     <h1>All computer power Consumptions</h1>
                 </div>
-                <div className="col text-end me-3">
+                <div className="col d-flex flex-row-reverse align-items-center">
+                    <h3>Current month cost: {cost}€</h3>
+                </div>
+                <div className="col-2 text-end me-3">
                     <a href={"computers/details"} className="btn btn-lg btn-primary">More details</a>
                 </div>
             </div>

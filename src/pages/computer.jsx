@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import moment from "moment/moment";
 import ComputerConsumptionChart from "./components/charts/ComputerConsumptionChart";
 import EditComputerButton from "./components/EditComputerButton";
+import useElectricityCost from "../hooks/useElectricityCost";
 
 export default function Computer() {
     let { computerId } = useParams();
 
+    const cost = useElectricityCost({interval: 'month', computerId: computerId});
     const [perPage, setPerPage] = useState(10);
     const [isLoading, setLoading] = useState(true);
     const [isError, setError] = useState(false);
@@ -96,7 +98,10 @@ export default function Computer() {
                 <div className="col">
                     <h1>{computerInfo.name} Power Consumptions</h1>
                 </div>
-                <div className="col text-end me-3">
+                <div className="col d-flex flex-row-reverse align-items-center">
+                    <h3>Current month cost: {cost}€</h3>
+                </div>
+                <div className="col-3 text-end me-3">
                     <a href={computerId + "/details"} className="btn btn-lg btn-primary me-3">More details</a>
                     <EditComputerButton
                         computerId={computerId}

@@ -168,6 +168,9 @@ export default function Settings() {
             <p className="text-white text-center">Failed to save settings</p>
           </div>
           )}
+          <a className="btn btn-success ms-2 mt-3" type="submit" href='/settings/electricity'>
+            Electricity plan settings
+          </a>
         </form>
       </div>
     </div>

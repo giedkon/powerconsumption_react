@@ -24,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-google-charts": "^4.0.0",
     "react-router-dom": "^6.8.2",
+    "react-time-picker": "^6.0.4",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
