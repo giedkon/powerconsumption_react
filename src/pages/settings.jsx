@@ -113,8 +113,8 @@ export default function Settings() {
   };
 
   return (
-    <div className="panel d-flex justify-content-center">
-      <div className="rounded p-4">
+    <div className="d-flex justify-content-center">
+      <div className="rounded bg-light p-4">
         <h2>Settings</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -127,7 +127,7 @@ export default function Settings() {
             />
           </div>
           <div className="form-group">
-            <label>Energy price:</label>
+            <label>Maximum Energy price:</label>
             <input
               className="form-control"
               type="number"
@@ -158,6 +158,9 @@ export default function Settings() {
           <button className="btn btn-primary mt-3" type="submit">
             Save
           </button>
+          <a className="btn btn-success ms-2 mt-3" type="submit" href='/settings/electricity'>
+            Electricity plan settings
+          </a>
           {saved == 1 && (
           <div className="mt-3" style={{ backgroundColor: 'green' ,borderRadius: "10px"}}>
             <p className="text-white text-center">Settings saved successfully</p>
@@ -168,9 +171,6 @@ export default function Settings() {
             <p className="text-white text-center">Failed to save settings</p>
           </div>
           )}
-          <a className="btn btn-success ms-2 mt-3" type="submit" href='/settings/electricity'>
-            Electricity plan settings
-          </a>
         </form>
       </div>
     </div>

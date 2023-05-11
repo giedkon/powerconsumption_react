@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function LimitChart(props) {
     const gaugechartRef = useRef(null);
-    const { currentValue, maxValue, title } = props;
+    const { currentValue, maxValue, title ,prefix } = props;
 
     useEffect(() => {
         const innertext = {
@@ -14,7 +14,7 @@ export default function LimitChart(props) {
             ctx.fillStyle = '#FF1A68';
             ctx.font = '20px arial';
             ctx.textAlign = 'center';
-            ctx.fillText(Math.round(currentValue * 100) / 100 + 'kWh', left + width / 2, top + height / 2 + 10);
+            ctx.fillText(Math.round(currentValue * 100) / 100 + prefix, left + width / 2, top + height / 2 + 10);
           }
         }
     
@@ -61,13 +61,13 @@ export default function LimitChart(props) {
     }, [currentValue, maxValue]);
 
     return (
-        <div className="limit-chart" style={{border: "2px solid rgba(255, 26, 104, 0.2)", borderRadius: "10px", margin: 10 }}>
-            <div className="limit-chart-canvas-container">
+        <div style={{ width: '400px', height: '225px', border: "2px solid rgba(255, 26, 104, 0.2)", borderRadius: "10px", margin: 10 }}>
+            <div style={{ height: '90%' }}>
             <canvas ref={gaugechartRef} />
             </div>
             <div style={{ display: 'flex' }}>
-            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{currentValue + 'kWh'}</div>
-            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{maxValue + 'kWh'}</div>
+            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{currentValue + prefix}</div>
+            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{maxValue + prefix}</div>
             </div>
         </div>
     );
