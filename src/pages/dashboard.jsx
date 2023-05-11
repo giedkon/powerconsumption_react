@@ -85,15 +85,15 @@ export default function Dashboard() {
             <div className="row text-center mb-3">
                 <h1>Dashboard</h1>
             </div>
-            <div className="col">
+            <div className="panel row mb-3">
                 <div className="d-flex justify-content-center">
                     <LimitChart currentValue={powerUsage.toFixed(3)} maxValue={powerLimit.maxValue} title={'Power usage'} prefix={'kWh'} />
 
                     <LimitChart currentValue={(powerUsage*electricityPrice).toFixed(2)} maxValue={powerLimit.maxValue*maxEnergyPriceLimit.maxValue} title={'Expenses'} prefix={'Eur'} />
                 </div>
             </div>
-            <div className="row">
-                <div className="d-flex justify-content-center">
+            <div className="panel row">
+                <div className="computer-list-dashboard d-flex flex-wrap justify-content-center">
                     {computersRender}
                 </div>
             </div>

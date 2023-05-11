@@ -113,8 +113,8 @@ export default function Settings() {
   };
 
   return (
-    <div className="d-flex justify-content-center">
-      <div className="rounded bg-light p-4">
+    <div className="panel d-flex justify-content-center">
+      <div className="rounded p-4">
         <h2>Settings</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">

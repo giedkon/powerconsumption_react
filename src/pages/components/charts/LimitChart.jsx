@@ -61,13 +61,13 @@ export default function LimitChart(props) {
     }, [currentValue, maxValue]);
 
     return (
-        <div style={{ width: '400px', height: '225px', border: "2px solid rgba(255, 26, 104, 0.2)", borderRadius: "10px", margin: 10 }}>
-            <div style={{ height: '90%' }}>
+        <div className="limit-chart" style={{border: "2px solid rgba(255, 26, 104, 0.2)", borderRadius: "10px", margin: 10 }}>
+            <div className="limit-chart-canvas-container">
             <canvas ref={gaugechartRef} />
             </div>
             <div style={{ display: 'flex' }}>
-            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{currentValue + prefix}</div>
-            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{maxValue + prefix}</div>
+            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{currentValue + 'kWh'}</div>
+            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{maxValue + 'kWh'}</div>
             </div>
         </div>
     );
