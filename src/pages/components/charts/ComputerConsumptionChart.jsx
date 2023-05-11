@@ -99,7 +99,7 @@ function BarChart(props) {
     return (
 
         <div style={{ width: '100%', height: '100%', border: "2px solid rgba(255, 26, 104, 0.2)", borderRadius: "10px", margin: 10 }}>
-            <div>
+            <div className="limit-chart-canvas-container d-flex justify-content-center align-items-center">
                 <canvas ref={barchartRef} />
             </div>
         </div>

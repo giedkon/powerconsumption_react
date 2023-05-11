@@ -5,6 +5,9 @@ import moment from "moment/moment";
 import momentDurationFormatSetup from "moment-duration-format";
 import AddComputerButton from "./components/AddComputerButton";
 import EditComputerButton from "./components/EditComputerButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCircleInfo, faTrash } from "@fortawesome/free-solid-svg-icons";
 momentDurationFormatSetup(moment);
 
 function getTimeStr(seconds) {
@@ -71,9 +74,15 @@ export default function ComputerList() {
                 <td>{inactiveTime}</td>
                 <td>--</td>
                 <td>
-                    <div className="d-flex justify-content-between">
-                        <Link to={'/computer/' + computer.id} className="button me-2" >Details</Link>
-                        <Link className="button-red ms-2" onClick={() => deleteComputer(computer.id)}>Delete</Link>
+                    <div className="computer-list-buttons">
+                        <Link to={'/computer/' + computer.id} className="button" >
+                            <FontAwesomeIcon className="text-black" icon={faCircleInfo} />
+                            <span className='computer-list-button-text'>Details</span>
+                        </Link>
+                        <Link className="button-red" onClick={() => deleteComputer(computer.id)}>
+                            <FontAwesomeIcon className="text-black" icon={faTrash} />
+                            <span className='computer-list-button-text'>Delete</span>
+                        </Link>
                     </div>
                 </td>
             </tr>
@@ -84,23 +93,23 @@ export default function ComputerList() {
 
     return (
         <>
-            <div className="row">
-                <div className="col">
+            <div className="panel row">
+                <div className="col-12 col-md-6 text-md-start text-center">
                     <h1>All computers</h1>
                 </div>
-                <div className="col text-end">
-                    <AddComputerButton 
-                        size='lg' 
-                        onAddComputer={handleAddComputer} 
+                <div className="col-12 col-md-6 text-md-end text-center">
+                    <AddComputerButton
+                        size='lg'
+                        onAddComputer={handleAddComputer}
                     />
-                    <a href="/allComputers" className="btn btn-lg btn-primary ms-3">
+                    <a href="/allComputers" className="btn btn-lg btn-primary m-1">
                         All computer details
                     </a>
                 </div>
             </div>
-            <div className="row">
+            <div className="panel row">
                 <div className="tables">
-                    <table className="table">
+                    <table className="w-100 table table-responsive">
                         <thead>
                             <tr>
                                 <th>Computer Name</th>

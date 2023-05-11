@@ -59,13 +59,13 @@ function GaugeChart({ currentValue, maxValue }) {
 
   return (
 
-    <div style={{ width: '400px', height: '225px', border: "2px solid rgba(255, 26, 104, 0.2)", borderRadius: "10px", margin: 10 }}>
-      <div style={{ height: '90%' }}>
+    <div className="limit-chart" style={{ border: "2px solid rgba(255, 26, 104, 0.2)", borderRadius: "10px", margin: 10 }}>
+      <div className="limit-chart-canvas-container">
         <canvas ref={gaugechartRef} />
       </div>
       <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>0kWh</div>
-        <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>200kWh</div>
+        <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{currentValue + 'kWh'}</div>
+        <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{maxValue + 'kWh'}</div>
       </div>
     </div>
 
@@ -130,8 +130,8 @@ function BarChart() {
 
   return (
 
-    <div style={{ width: '800px', height: '450px', border: "2px solid rgba(255, 26, 104, 0.2)", borderRadius: "10px", margin: 10 }}>
-      <div>
+    <div className="bar-chart" style={{ border: "2px solid rgba(255, 26, 104, 0.2)", borderRadius: "10px", margin: 10 }}>
+      <div className="bar-chart-canvas-container">
         <canvas ref={barchartRef} />
       </div>
     </div>
@@ -174,9 +174,15 @@ export default function Diagrams() {
 
 
   return (
-    <div className="diagram" style={{ display: 'flex' }}>
-      <GaugeChart currentValue={powerDrawSum} maxValue={200} />
-      <BarChart />
+    <div className="panel">
+      <div className="row">
+        <div className="col-12 d-flex justify-content-center">
+          <GaugeChart currentValue={powerDrawSum} maxValue={200} />
+        </div>
+        <div className="col-12 d-flex justify-content-center">
+          <BarChart />
+        </div>
+      </div>
     </div>
   );
 }

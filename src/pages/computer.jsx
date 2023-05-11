@@ -94,26 +94,32 @@ export default function Computer() {
 
     return (
         <>
-            <div className="row">
-                <div className="col">
-                    <h1>{computerInfo.name} Power Consumptions</h1>
+            <div className="panel row">
+                <div className="col-12 col-lg-4">
+                    <div className="h-100 d-flex flex-column justify-content-center align-items-center">
+                        <h1>{computerInfo.name} Power Consumptions</h1>
+                    </div>
                 </div>
-                <div className="col d-flex flex-row-reverse align-items-center">
-                    <h3>Current month cost: {cost}€</h3>
+                <div className="col-12 col-lg-4">
+                    <div className="h-100 d-flex flex-column justify-content-center align-items-center">
+                        <h3>Current month cost: {cost}€</h3>
+                    </div>
                 </div>
-                <div className="col-3 text-end me-3">
-                    <a href={computerId + "/details"} className="btn btn-lg btn-primary me-3">More details</a>
-                    <EditComputerButton
-                        computerId={computerId}
-                        size='lg'
-                        handleComputerUpdate={handleComputerUpdate}
-                    />
+                <div className="col-12 col-lg-4">
+                    <div className="h-100 d-flex flex-row justify-content-center align-items-center">
+                        <a href={computerId + "/details"} className="btn btn-lg btn-primary m-1">More details</a>
+                        <EditComputerButton
+                            computerId={computerId}
+                            size='lg'
+                            handleComputerUpdate={handleComputerUpdate}
+                        />
+                    </div>
                 </div>
             </div>
             {/*<div className="row">
                 <a href={computerId + "/details"} className="btn btn-primary ms-3" style={{width: '8rem'}}>More details</a>
             </div>*/}
-            <div className="row">
+            <div className="panel row">
                 <div className="tables">
                     <table className="table">
                         <thead>

@@ -23,8 +23,8 @@ export default function AuthTest() {
         });
 
     return (
-        <>
+        <div className="panel">
             {message};
-        </>
+        </div>
     );
 }

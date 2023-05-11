@@ -158,11 +158,11 @@ export default function ComputerDetails() {
     }
 
     return (
-        <div className='row'>
-            <div className="col">
+        <div className='panel row flex-lg-row flex-column-reverse'>
+            <div className="col-12 col-lg-8">
                 {data.length != 0 ? <RenderTable /> : <NoResultError />}
             </div>
-            <div className="col-md-5 col-12 mx-5 mt-3">
+            <div className="col-12 col-lg-4">
                 <div className="d-flex flex-row justify-content-center">
                         <button 
                             className={chartRange == 'day' ? 'btn btn-primary mx-1' : 'btn btn-info mx-1'} 
