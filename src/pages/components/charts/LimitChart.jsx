@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function LimitChart(props) {
     const gaugechartRef = useRef(null);
-    const { currentValue, maxValue, title } = props;
+    const { currentValue, maxValue, title ,prefix } = props;
 
     useEffect(() => {
         const innertext = {
@@ -14,7 +14,7 @@ export default function LimitChart(props) {
             ctx.fillStyle = '#FF1A68';
             ctx.font = '20px arial';
             ctx.textAlign = 'center';
-            ctx.fillText(Math.round(currentValue * 100) / 100 + 'kWh', left + width / 2, top + height / 2 + 10);
+            ctx.fillText(Math.round(currentValue * 100) / 100 + prefix, left + width / 2, top + height / 2 + 10);
           }
         }
     

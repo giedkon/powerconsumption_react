@@ -9,13 +9,32 @@ export default function Dashboard() {
     const [isError, setError] = useState(false);
     const [computers, setComputers] = useState([]);
     const [powerLimit, setPowerLimit] = useState({});
+    const [maxEnergyPriceLimit, setMaxEnergyPriceLimit] = useState({});
     const [powerUsage, setPowerUsage] = useState(0);
+
+    const [electricityPrice, setElectricityPrice] =  useState(0);
 
     useEffect(() => {
         axios
             .get(import.meta.env.VITE_API_URL + 'power_consumption/limit')
             .then(function (response) {
                 setPowerLimit(response.data.at(-1));
+            }).catch(function (error) {
+                setError(true);
+            })
+
+        axios
+            .get(import.meta.env.VITE_API_URL + 'electricity_cost/limit')
+            .then(function (response) {
+                setMaxEnergyPriceLimit(response.data.at(-1));
+            }).catch(function (error) {
+                setError(true);
+            })
+
+        axios
+            .get(import.meta.env.VITE_API_URL + 'electricity_cost')
+            .then(function (response) {
+                setElectricityPrice(response.data.at(-1).price);
             }).catch(function (error) {
                 setError(true);
             })
@@ -29,6 +48,7 @@ export default function Dashboard() {
             .get(import.meta.env.VITE_API_URL + 'computer/power_consumption', {params: powerParams})
             .then(function(response) {
                 setPowerUsage(response.data.reduce((sum, a) => sum + a.cpuPowerDraw + a.gpuPowerDraw, 0))
+                console.log(response.data)
             }).catch(function(error) {
                 setError(true);
             });
@@ -67,7 +87,9 @@ export default function Dashboard() {
             </div>
             <div className="panel row mb-3">
                 <div className="d-flex justify-content-center">
-                    <LimitChart currentValue={powerUsage.toFixed(3)} maxValue={powerLimit.maxValue} title={'Power usage'} />
+                    <LimitChart currentValue={powerUsage.toFixed(3)} maxValue={powerLimit.maxValue} title={'Power usage'} prefix={'kWh'} />
+
+                    <LimitChart currentValue={(powerUsage*electricityPrice).toFixed(2)} maxValue={powerLimit.maxValue*maxEnergyPriceLimit.maxValue} title={'Expenses'} prefix={'Eur'} />
                 </div>
             </div>
             <div className="panel row">
