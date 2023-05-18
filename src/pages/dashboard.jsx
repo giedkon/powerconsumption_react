@@ -3,6 +3,7 @@ import moment from "moment";
 import ComputerDashItem from "./components/dashboard/ComputerDashItem";
 import LimitChart from './components/charts/LimitChart';
 import axios from 'axios';
+import useElectricityCost from '../hooks/useElectricityCost';
 
 export default function Dashboard() {
     const [isLoading, setLoading] = useState(true);
@@ -11,8 +12,7 @@ export default function Dashboard() {
     const [powerLimit, setPowerLimit] = useState({});
     const [maxEnergyPriceLimit, setMaxEnergyPriceLimit] = useState({});
     const [powerUsage, setPowerUsage] = useState(0);
-
-    const [electricityPrice, setElectricityPrice] =  useState(0);
+    const cost = useElectricityCost({interval: 'month'});
 
     useEffect(() => {
         axios
@@ -27,14 +27,6 @@ export default function Dashboard() {
             .get(import.meta.env.VITE_API_URL + 'electricity_cost/limit')
             .then(function (response) {
                 setMaxEnergyPriceLimit(response.data.at(-1));
-            }).catch(function (error) {
-                setError(true);
-            })
-
-        axios
-            .get(import.meta.env.VITE_API_URL + 'electricity_cost')
-            .then(function (response) {
-                setElectricityPrice(response.data.at(-1).price);
             }).catch(function (error) {
                 setError(true);
             })
@@ -88,8 +80,7 @@ export default function Dashboard() {
             <div className="panel row mb-3">
                 <div className="d-flex justify-content-center">
                     <LimitChart currentValue={powerUsage.toFixed(3)} maxValue={powerLimit.maxValue} title={'Power usage'} prefix={'kWh'} />
-
-                    <LimitChart currentValue={(powerUsage*electricityPrice).toFixed(2)} maxValue={powerLimit.maxValue*maxEnergyPriceLimit.maxValue} title={'Expenses'} prefix={'Eur'} />
+                    <LimitChart currentValue={cost} maxValue={maxEnergyPriceLimit.maxValue} title={'Expenses'} prefix={'Eur'} />
                 </div>
             </div>
             <div className="panel row">
