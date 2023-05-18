@@ -25,7 +25,6 @@ export default function useElectricityCost({ interval, computerId }) {
             axios
                 .get(`electricity_cost/price?From=${endTime}&To=${currentTime}`)
                 .then((response) => {
-                    console.log(response.data);
                     setCost(response.data);
                 })
                 .catch((err) => {
@@ -35,7 +34,6 @@ export default function useElectricityCost({ interval, computerId }) {
             axios
                 .get(`electricity_cost/price?From=${endTime}&To=${currentTime}&ComputerId=${computerId}`)
                 .then((response) => {
-                    console.log(response.data);
                     setCost(response.data);
                 })
                 .catch((err) => {

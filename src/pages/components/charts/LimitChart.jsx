@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function LimitChart(props) {
     const gaugechartRef = useRef(null);
-    const { currentValue, maxValue, title ,prefix } = props;
+    const { currentValue, maxValue, title, prefix } = props;
 
     useEffect(() => {
         const innertext = {
@@ -66,8 +66,8 @@ export default function LimitChart(props) {
             <canvas ref={gaugechartRef} />
             </div>
             <div style={{ display: 'flex' }}>
-            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{currentValue + 'kWh'}</div>
-            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{maxValue + 'kWh'}</div>
+            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{currentValue + prefix}</div>
+            <div style={{ width: '50%', height: '10%', display: "flex", justifyContent: "center", alignItems: "center" }}>{maxValue + prefix}</div>
             </div>
         </div>
     );
