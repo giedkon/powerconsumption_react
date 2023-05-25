@@ -71,8 +71,6 @@ export default function ComputerList() {
         return (
             <tr key={computer.id}>
                 <td>{computer.name}</td>
-                <td>{inactiveTime}</td>
-                <td>--</td>
                 <td>
                     <div className="computer-list-buttons">
                         <Link to={'/computer/' + computer.id} className="button" >
@@ -113,8 +111,6 @@ export default function ComputerList() {
                         <thead>
                             <tr>
                                 <th>Computer Name</th>
-                                <th>Inactivity </th>
-                                <th>Total power consumption (last 5 min)</th>
                                 <th></th>
                             </tr>
                         </thead>

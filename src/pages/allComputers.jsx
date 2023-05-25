@@ -59,13 +59,12 @@ export default function Computer() {
         );
     }
     const consumptionRender = consumptions.map(function (consumption, index) {
-        let time = moment(consumption.time).format('YYYY-MM-DD HH:mm');
+        let time = moment(consumption.time).format('YYYY-MM-DD HH:mm:ss');
         return (
             <tr key={consumption.id}>
                 <td>{time}</td>
-                <td>{consumption.inactivity || '--'}</td>
-                <td>{consumption.cpuPowerDraw} kWh</td>
-                <td>{consumption.gpuPowerDraw} kWh</td>
+                <td>{consumption.cpuPowerDraw.toFixed(8)} kWh</td>
+                <td>{consumption.gpuPowerDraw.toFixed(8)} kWh</td>
             </tr>
         );
 
@@ -78,7 +77,7 @@ export default function Computer() {
                     <h1>All computer power Consumptions</h1>
                 </div>
                 <div className="col d-flex flex-row-reverse align-items-center">
-                    <h3>Current month cost: {cost}€</h3>
+                    <h3>Current month cost: {Math.ceil(cost * 100) / 100}€</h3>
                 </div>
                 <div className="col-2 text-end me-3">
                     <a href={"computers/details"} className="btn btn-lg btn-primary">More details</a>
@@ -93,7 +92,6 @@ export default function Computer() {
                         <thead>
                             <tr>
                                 <th>Timestamp</th>
-                                <th>Inactivity (seconds)</th>
                                 <th>CPU Consumption (kWh)</th>
                                 <th>GPU Consumption (kWh)</th>
                             </tr>
