@@ -39,10 +39,10 @@ function BarChart(props) {
             preDataCPU = new Array(30).fill(0);
             preDataGPU = new Array(30).fill(0);
             for (let i = 0; i < 30; i++) {
-                preLabels.unshift(moment().subtract(i, 'days').format('MM-DD'));
+                preLabels.unshift(moment().subtract(i, 'days').format('DD'));
             }
             collect(props.data).each(function (item) {
-                let index = preLabels.indexOf(moment(item.time).format('MM-DD'));
+                let index = preLabels.indexOf(moment(item.time).format('DD'));
 
                 preDataCPU[index] = item.cpuPowerDraw;
                 preDataGPU[index] = item.gpuPowerDraw;

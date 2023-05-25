@@ -107,7 +107,7 @@ export default function ComputerDetails() {
     }
 
     const consumptionRender = data.map(function (val, index) {
-        let time = moment(val.time).format('YYYY-MM-DD HH:mm');
+        let time = moment(val.time).format('YYYY-MM-DD HH:mm:ss');
 
         if (chartRange != 'hour' || chartRange != 'day') {
             time =  moment(val.time).format('YYYY-MM-DD');
@@ -116,7 +116,6 @@ export default function ComputerDetails() {
         return (
             <tr key={val.id}>
                 <td>{time}</td>
-                <td>{val.inactivity.toFixed(5) || '--'}</td>
                 <td>{val.cpuPowerDraw} kWh</td>
                 <td>{val.gpuPowerDraw} kWh</td>
             </tr>
@@ -135,7 +134,6 @@ export default function ComputerDetails() {
                         <thead>
                             <tr>
                                 <th>Timestamp</th>
-                                <th>Inactivity (seconds)</th>
                                 <th>CPU Consumption (kWh)</th>
                                 <th>GPU Consumption (kWh)</th>
                             </tr>
@@ -169,11 +167,11 @@ export default function ComputerDetails() {
                             onClick={() => setChartRangeFunc('day')}>
                                 Day
                         </button>
-                        <button 
+                        {/*<button 
                             className={chartRange == 'week' ? 'btn btn-primary mx-1' : 'btn btn-info mx-1'}
                             onClick={() => setChartRangeFunc('week')}>
                                 Week
-                        </button>
+                        </button>*/}
                         <button 
                             className={chartRange == 'month' ? 'btn btn-primary mx-1' : 'btn btn-info mx-1'}  
                             onClick={() => setChartRangeFunc('month')}>
